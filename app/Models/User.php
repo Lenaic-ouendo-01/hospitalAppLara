@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -22,8 +23,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id'
     ];
 
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
     public function director(): HasOne
     {
         return $this->hasOne(Director::class);
@@ -34,7 +40,7 @@ class User extends Authenticatable
         return $this->hasOne(Doctor::class);
     }
 
-    public function patient(): HasOne
+    public function patientInformation(): HasOne
     {
         return $this->hasOne(Patient::class);
     }
@@ -57,4 +63,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
 }

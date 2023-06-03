@@ -2,40 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePatientUserRequest;
+use App\Http\Requests\UpdatePatientUserRequest;
 use App\Models\Patient;
+use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class PatientController extends Controller
 {
-    public function createPatient(Request $request){
-        $user =  User::create([
-            "name"=>$request->name, 
-            "password"=>Hash::make($request->password), 
-            "email"=>$request->email 
-        ]);
-        
-        $patient = Patient::create([
-            "number"=>$request->number,
-            "nation"=>$request->nation,
-            "sex"=>$request->sex,
-            "birth"=>$request->birth,
-            "address"=>$request->address,
-            "profession"=>$request->profession,
-            "allergies"=>$request->allergies,
-            "history_diseases"=>$request->history_diseases,
-            "ex_surgery"=>$request->ex_surgery,
-            "vaccine"=>$request->vaccine,
-            "hereditary"=>$request->hereditary,
-            "insurance"=>$request->insurance,
-            "emergency_contact"=>$request->emergency_contact,
-            "blood_type"=>$request->blood_type,
-            "language"=>$request->language,
-            "marital_status"=>$request->marital_status,
-            "users_id"=>$request->user()->id,
-        ]);
-
-        return response()->json(["message"=>"Le patient a été créer avec succes."]);
+    public function all()
+    {
+         $patientRole = Role::where('code', Role::PATIENT)->first();
+         $allPatient = Patient::whereHas('user', function ($query) use($patientRole) {
+             $query->where('role_id', $patientRole->id);
+         })->with('user')->get();
+        return response()->json([ 'data' => $allPatient ]);
     }
+
+    public function getOne(int $patientId)
+    {
+        return response()->json([ 'data' => Patient::find($patientId)->with('user')->first() ]);
+    }
+
+    public function create(CreatePatientUserRequest $request){
+
+        try {
+            DB::beginTransaction();
+
+            $patientRole = Role::where('code', Role::PATIENT)->first();
+            $user =  User::create([
+                "name"=>$request->name,
+                "password"=>Hash::make($request->password),
+                "email"=>$request->email,
+                'role_id' => $patientRole->id,
+            ]);
+
+            $user->patientInformation()->create($request->validated());
+            DB::commit();
+
+            return response()->json(["message"=>"Le patient a été créer avec succes."]);
+
+
+        } catch (\Throwable $throwable) {
+            DB::rollBack();
+            Log::error($throwable);
+            throw $throwable;
+        }
+    }
+
+    public function edit(UpdatePatientUserRequest $request, int $userId)
+    {
+        $user = User::find($userId);
+
+        $user->update($request->only(['name', 'email']));
+        try {
+            $user->patientInformation()->update($request->validated());
+
+            return response()->json(["message"=>"Le patient a été modifié avec succès."]);
+        } catch (\Throwable $throwable) {
+            Log::error($throwable);
+            throw $throwable;
+        }
+    }
+
 }

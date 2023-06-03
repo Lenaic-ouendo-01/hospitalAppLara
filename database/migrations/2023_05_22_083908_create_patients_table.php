@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.  
+     * Run the migrations.
      *
      * @return void
      */
@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('number');
-            $table->string('nation');         
+            $table->string('nation');
             $table->string('sex');
             $table->date('birth');
             $table->string('address');
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('blood_type');
             $table->string('language');
             $table->string('marital_status');
-            $table->foreignId('users_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

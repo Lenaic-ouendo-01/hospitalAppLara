@@ -26,10 +26,22 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->post('/patient/create', [PatientController::class, 'createPatient']);
+Route::middleware('auth:sanctum')->group(function() {
+    Route::post('/users/patient', [\App\Http\Controllers\UserController::class, 'createPatient']);
+    Route::post('/users/doctor', [\App\Http\Controllers\UserController::class, 'createDoctor']);
+    Route::delete('/users/{id}', [\App\Http\Controllers\UserController::class, 'delete']);
 
-Route::middleware('auth:sanctum')->post('/doctor/create', [DoctorController::class, 'createDoctor']);
 
-Route::middleware('auth:sanctum')->post('/hospital/create', [HospitalController::class, 'createHospital']);
+    Route::get('/patients', [PatientController::class, 'all']);
+    Route::post('/patients', [PatientController::class, 'create']);
+    Route::get('/patients/{id}', [PatientController::class, 'getOne']);
+    Route::put('/patients/{id}', [PatientController::class, 'edit']);
+    Route::delete('/patients/{id}', [PatientController::class, 'delete']);
 
-Route::middleware('auth:sanctum')->post('/service/create', [ServiceController::class, 'createService']);
+    Route::post('/doctor/create', [DoctorController::class, 'createDoctor']);
+
+    Route::post('/hospital/create', [HospitalController::class, 'createHospital']);
+
+    Route::post('/service/create', [ServiceController::class, 'createService']);
+});
+
