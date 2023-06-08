@@ -19,7 +19,8 @@ class UserController extends Controller
         return response()->json(["message"=>"Utilisateur a été supprimé avec succès."]);
     }
 
-    public function createPatient() {
+    public function createPatient() 
+    {
 
     }
 

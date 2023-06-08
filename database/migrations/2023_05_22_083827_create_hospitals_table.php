@@ -25,6 +25,7 @@ return new class extends Migration
             $table->time('hours')->nullable();
             $table->longText('description')->nullable();
             $table->string('language');
+            $table->foreignId('director_id')->constrained()->onDelete('cascade');
             $table->timestamps();
             
         });

@@ -38,8 +38,7 @@ class HospitalController extends Controller
                 "number_urgence"=>$request->number_urgence,
                 "hours"=>$request->hours,
                 "language"=>$request->language,
-                // "status"=>$request->status,
-                // "hospital_id"=>$request->user()->director->hospital->id,
+                "director_id"=>$request->user()->id,
             ]);
 
             DB::commit();

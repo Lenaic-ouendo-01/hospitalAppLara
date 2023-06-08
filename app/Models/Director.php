@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Director extends Model
 {
@@ -18,9 +19,9 @@ class Director extends Model
         'nationality'
     ];
 
-    public function hospital(): BelongsTo
+    public function hospital(): HasOne
     {
-        return $this->belongsTo(Hospital::class);
+        return $this->hasOne(Hospital::class);
     }
 
     public function user(): BelongsTo
