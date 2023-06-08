@@ -14,8 +14,8 @@ class MedicalExam extends Model
     protected $fillable = [
         'typeExam',
         'dateExam',
-        'medical_records_id',
-        'doctors_id'
+        'medical_record_id',
+        'doctor_id'
     ];
 
     public function medicalRecord(): BelongsTo

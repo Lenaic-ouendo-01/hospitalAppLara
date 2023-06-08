@@ -12,7 +12,7 @@ class MedicalRecord extends Model
     use HasFactory;
 
     protected $fillable = [
-        'patients_id',
+        'patient_id',
         'date_created',
         'recommendation',
         'comment'

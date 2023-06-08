@@ -4,7 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -36,12 +39,27 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/patients', [PatientController::class, 'create']);
     Route::get('/patients/{id}', [PatientController::class, 'getOne']);
     Route::put('/patients/{id}', [PatientController::class, 'edit']);
-    Route::delete('/patients/{id}', [PatientController::class, 'delete']);
+    Route::delete('/patients/{id}', [UserController::class, 'delete']);
 
-    Route::post('/doctor/create', [DoctorController::class, 'createDoctor']);
+    Route::get('/doctors', [DoctorController::class, 'all']);
+    Route::post('/doctors', [DoctorController::class, 'create']);
+    Route::get('/doctors/{id}', [DoctorController::class, 'getOne']);
+    Route::put('/doctors/{id}', [DoctorController::class, 'edit']);
+    Route::delete('/doctors/{id}', [UserController::class, 'delete']);
 
-    Route::post('/hospital/create', [HospitalController::class, 'createHospital']);
+    Route::get('/services', [ServiceController::class, 'all']);
+    Route::post('/services', [ServiceController::class, 'create']);
+    Route::get('/services/{id}', [ServiceController::class, 'getOne']);
+    Route::put('/services/{id}', [ServiceController::class, 'edit']);
+    Route::delete('/services/{id}', [ServiceController::class, 'delete']);
 
-    Route::post('/service/create', [ServiceController::class, 'createService']);
+    Route::get('/hospital', [HospitalController::class, 'all']);
+    Route::post('/hospital', [HospitalController::class, 'create']);
+    Route::get('/hospital/{id}', [HospitalController::class, 'getOne']);
+    Route::put('/hospital/{id}', [HospitalController::class, 'edit']);
+    Route::delete('/hospital/{id}', [HospitalController::class, 'delete']);
+
+
+
 });
 

@@ -17,8 +17,8 @@ class Doctor extends Model
         'sex',
         'nationality',
         'language',
-        'hospital_services_id',
-        'users_id'
+        'hospital_service_id',
+        'user_id'
     ];
 
     public function medicalExams(): HasMany

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('drug');
             $table->longText('usage_instruction');
             $table->string('state');
-            $table->foreignId('results_id')->constrained()->onDelete('cascade');
+            $table->foreignId('result_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

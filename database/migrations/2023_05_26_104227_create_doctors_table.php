@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('sex');
             $table->string('nationality');
             $table->string('langauage');
-            $table->foreignId('hospital_services_id')->constrained()->onDelete('cascade');
-            $table->foreignId('users_id')->constrained()->onDelete('cascade');
+            $table->foreignId('hospital_service_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ class Result extends Model
     use HasFactory;
 
     protected $fillable = [
-        'medical_exams_id',
+        'medical_exam_id',
         'result'
     ];
 

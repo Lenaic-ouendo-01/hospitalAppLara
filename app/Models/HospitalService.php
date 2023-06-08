@@ -14,7 +14,7 @@ class HospitalService extends Model
     protected $fillable = [
         'name',
         'description',
-        'hospitals_id',
+        'hospital_id',
         'opening_hours',
         'status'
 

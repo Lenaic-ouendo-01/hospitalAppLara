@@ -11,7 +11,7 @@ class Ordinance extends Model
     use HasFactory;
 
     protected $fillable = [
-        'results_id',
+        'result_id',
         'dosage',
         'drug',
         'usage_instruction',

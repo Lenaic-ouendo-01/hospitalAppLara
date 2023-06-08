@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('typeExam');
             $table->date('dateExam');
-            $table->foreignId('doctors_id')->constrained()->onDelete('cascade');
-            $table->foreignId('medical_records_id')->constrained()->onDelete('cascade');
+            $table->foreignId('doctor_id')->constrained()->onDelete('cascade');
+            $table->foreignId('medical_record_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

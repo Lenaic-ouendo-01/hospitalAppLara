@@ -26,7 +26,7 @@ class PatientController extends Controller
 
     public function getOne(int $patientId)
     {
-        return response()->json([ 'data' => Patient::find($patientId)->with('user')->first() ]);
+        return response()->json([ 'data' => Patient::where("id", $patientId)->first() ]);
     }
 
     public function create(CreatePatientUserRequest $request){
@@ -61,7 +61,7 @@ class PatientController extends Controller
 
         $user->update($request->only(['name', 'email']));
         try {
-            $user->patientInformation()->update($request->validated());
+            $user->update($request->validated());
 
             return response()->json(["message"=>"Le patient a été modifié avec succès."]);
         } catch (\Throwable $throwable) {

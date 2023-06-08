@@ -28,7 +28,7 @@ class Patient extends Model
         'blood_type',
         'language',
         'marital_status',
-        'users_id'
+        'user_id'
     ];
 
     public function user(): BelongsTo

@@ -11,8 +11,8 @@ class Director extends Model
     use HasFactory;
 
     protected $fillable = [
-        'users_id',
-        'hospitals_id',
+        'user_id',
+        'hospital_id',
         'number',
         'sex',
         'nationality'

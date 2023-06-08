@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('date_created');
             $table->longText('recommendation')->nullable();
             $table->text('comment')->nullable();
-            $table->foreignId('patients_id')->constrained()->onDelete('cascade');
+            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
