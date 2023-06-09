@@ -22,7 +22,7 @@ class Hospital extends Model
         'hours',
         'description',
         'language',
-        'director_id'
+        'user_id'
     ];
 
     public function hospitalServices(): HasMany
@@ -30,7 +30,7 @@ class Hospital extends Model
         return $this->hasMany(HospitalService::class);
     }
 
-    public function director(): BelongsTo
+    public function users(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

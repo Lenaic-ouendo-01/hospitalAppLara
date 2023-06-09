@@ -7,14 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Patient extends Model
+class PatientInformation extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'number',
-        'nation',
-        'sex',
         'birth',
         'address',
         'profession',

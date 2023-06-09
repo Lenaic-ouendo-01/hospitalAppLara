@@ -23,7 +23,7 @@ class HospitalController extends Controller
         return response()->json([ 'data' => Hospital::where("id", $hospitalId)->first() ]);
     }
 
-    public function create(CreateHospitalRequest $request){ 
+    public function create(CreateHospitalRequest $request){
         try {
             DB::beginTransaction();
 
@@ -38,11 +38,11 @@ class HospitalController extends Controller
                 "number_urgence"=>$request->number_urgence,
                 "hours"=>$request->hours,
                 "language"=>$request->language,
-                "director_id"=>$request->user()->id,
+                "user_id"=>$request->user()->id,
             ]);
 
             DB::commit();
-            
+
             return response()->json(["message"=>"Votre hôpital a été créer avec succes."]);
 
         } catch (\Throwable $throwable) {
@@ -59,8 +59,8 @@ class HospitalController extends Controller
 
             return response()->json(["message"=>"Les informations de l'hopital ont été modifié avec succès."]);
         } catch (\Throwable $throwable) {
-            Log::error($throwable);    
-            throw $throwable; 
+            Log::error($throwable);
+            throw $throwable;
         }
     }
     public function delete(int $userId) {

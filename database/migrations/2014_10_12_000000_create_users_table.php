@@ -19,7 +19,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phoneNumber')->nullable();
+            $table->string('sex')->nullable();
+            $table->string('nationality')->nullable();
             $table->rememberToken();
+            $table->foreignId('created_by')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }

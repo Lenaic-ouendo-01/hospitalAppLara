@@ -23,27 +23,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id'
+        'role_id',
+        'phoneNumber',
+        'sex',
+        'nationality'
     ];
-
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
-    public function director(): HasOne
-    {
-        return $this->hasOne(Director::class);
-    }
-
-    public function doctor(): HasOne
-    {
-        return $this->hasOne(Doctor::class);
-    }
-
-    public function patientInformation(): HasOne
-    {
-        return $this->hasOne(Patient::class);
-    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -63,6 +47,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function hospital(): HasOne
+    {
+        return $this->hasOne(Hospital::class);
+    }
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+    public function director(): HasOne
+    {
+        return $this->hasOne(Director::class);
+    }
+
+    public function doctor(): HasOne
+    {
+        return $this->hasOne(Doctor::class);
+    }
+
+    public function patientInformation(): HasOne
+    {
+        return $this->hasOne(PatientInformation::class);
+    }
 
 
 }

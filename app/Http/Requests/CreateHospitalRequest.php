@@ -27,7 +27,7 @@ class CreateHospitalRequest extends FormRequest
     {
         return [
             "name" => ['required', 'string', 'max:200'],
-            "email" => ['required', 'email'],
+            "email" => ['required', 'email', 'unique:hospitals,email'],
             "number_fix" => ['required', 'starts_with:+229'],
             "number_mobile" => ['required', 'starts_with:+229'],
             "number_urgence" => ['required', 'starts_with:+229'],

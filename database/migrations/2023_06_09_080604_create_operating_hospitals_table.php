@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('doctor_informations', function (Blueprint $table) {
+        Schema::create('operating_hospitals', function (Blueprint $table) {
             $table->id();
-            $table->string('language');
-            $table->foreignId('hospital_service_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('hospital_id')->references('id')->on('hospitals');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doctors');
+        Schema::dropIfExists('operating_hospitals');
     }
 };

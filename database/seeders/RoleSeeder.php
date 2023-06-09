@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
         Role::upsert([
             ['code' => Role::DIRECTOR, 'name' => 'Directeur'],
             ['code' => Role::DOCTOR, 'name' => 'Docteur'],
-            ['code' => Role::PATIENT, 'name' => 'Patient'],
+            ['code' => Role::PATIENT, 'name' => 'PatientInformation'],
         ],['code']);
     }
 }

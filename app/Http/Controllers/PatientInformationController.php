@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePatientUserRequest;
 use App\Http\Requests\UpdatePatientUserRequest;
-use App\Models\Patient;
+use App\Models\PatientInformation;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Query\Builder;
@@ -13,20 +13,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
-class PatientController extends Controller
+class PatientInformationController extends Controller
 {
     public function all()
     {
-         $patientRole = Role::where('code', Role::PATIENT)->first();
-         $allPatient = Patient::whereHas('user', function ($query) use($patientRole) {
-             $query->where('role_id', $patientRole->id);
-         })->with('user')->get();
-        return response()->json([ 'data' => $allPatient ]);
+
+        return response()->json([ 'data' => [] ]);
     }
 
     public function getOne(int $patientId)
     {
-        return response()->json([ 'data' => Patient::where("id", $patientId)->first() ]);
+        return response()->json([ 'data' => PatientInformation::where("id", $patientId)->first() ]);
     }
 
     public function create(CreatePatientUserRequest $request){
