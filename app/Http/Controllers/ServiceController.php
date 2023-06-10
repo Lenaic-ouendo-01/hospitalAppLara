@@ -20,7 +20,7 @@ class ServiceController extends Controller
                 "description"=>$request->description,
                 "opening_hours"=>$request->opening_hours,
                 "status"=>$request->status,
-                "hospital_id"=>$request->user()->director->hospital->id,
+                "hospital_id"=>$request->user()->hospital->id,
             ]);
             DB::commit();
             

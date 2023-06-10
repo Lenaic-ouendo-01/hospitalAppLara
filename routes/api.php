@@ -36,13 +36,13 @@ Route::middleware('auth:sanctum')->group(function() {
 
 
     Route::get('/patients', [PatientInformationController::class, 'all']);
-    Route::post('/patients', [PatientInformationController::class, 'create']);
+    // Route::post('/patients', [PatientInformationController::class, 'create']);
     Route::get('/patients/{id}', [PatientInformationController::class, 'getOne']);
     Route::put('/patients/{id}', [PatientInformationController::class, 'edit']);
     Route::delete('/patients/{id}', [UserController::class, 'delete']);
 
     Route::get('/doctors', [DoctorController::class, 'all']);
-    Route::post('/doctors', [DoctorController::class, 'create']);
+    // Route::post('/doctors', [DoctorController::class, 'create']);
     Route::get('/doctors/{id}', [DoctorController::class, 'getOne']);
     Route::put('/doctors/{id}', [DoctorController::class, 'edit']);
     Route::delete('/doctors/{id}', [UserController::class, 'delete']);

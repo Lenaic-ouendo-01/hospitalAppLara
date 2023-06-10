@@ -29,7 +29,7 @@ class StoreUserRequest extends FormRequest
             "password" => ['required', Password::min(8)],
             "email" => ['required', 'email', 'unique:users,email'],
             "phoneNumber" => ['required', 'string', 'starts_with:+229', 'max:200'],
-            "sex" => ['required', 'string', 'in:m,f'],
+            "sex" => ['required', 'string'],
             "nationality" => ['required', 'string'],
             'birth' => ['required', 'date'] ,
         ];

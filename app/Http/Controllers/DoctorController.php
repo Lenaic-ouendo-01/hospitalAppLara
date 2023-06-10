@@ -25,7 +25,9 @@ class DoctorController extends Controller
 
     public function getOne(int $doctorId)
     {
-        return response()->json([ 'data' => Doctor::find($doctorId)->with('user')->first() ]);
+        // return response()->json([ 'data' => Doctor::find($doctorId)->with('user')->first() ]);
+        return response()->json([ 'data' => Doctor::where("id", $doctorId)->first() ]);
+
     }
 
     public function create(CreateDoctorRequest $request){
@@ -44,7 +46,7 @@ class DoctorController extends Controller
 
             $user->doctorInformation()->create($request->validated());
             DB::commit();
-
+ 
             return response()->json(["message"=>"Le docteur a été créer avec succes."]);
 
 

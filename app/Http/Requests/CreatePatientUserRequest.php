@@ -19,7 +19,7 @@ class CreatePatientUserRequest extends FormRequest
         return Auth::user()->role->code === Role::DIRECTOR || Auth::user()->role->code === Role::DOCTOR  ;
     }
 
-    /**
+    /** 
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
