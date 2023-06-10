@@ -12,20 +12,20 @@ class MedicalExam extends Model
     use HasFactory;
 
     protected $fillable = [
-        'typeExam',
-        'dateExam',
+        'exam_type',
+        'exam_date',
+        'created_by',
         'medical_record_id',
-        'doctor_id'
     ];
 
     public function medicalRecord(): BelongsTo
     {
         return $this->belongsTo(MedicalRecord::class);
     }
-    
+
     public function doctor(): BelongsTo
     {
-        return $this->belongsTo(Doctor::class);
+        return $this->belongsTo(User::class, 'doctor_id');
     }
 
     public function result(): HasOne

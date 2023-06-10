@@ -26,7 +26,8 @@ class User extends Authenticatable
         'role_id',
         'phoneNumber',
         'sex',
-        'nationality'
+        'nationality',
+        'created_by'
     ];
 
     /**
@@ -71,6 +72,5 @@ class User extends Authenticatable
     {
         return $this->hasOne(PatientInformation::class);
     }
-
 
 }

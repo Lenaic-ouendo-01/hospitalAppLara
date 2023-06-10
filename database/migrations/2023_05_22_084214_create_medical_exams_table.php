@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('medical_exams', function (Blueprint $table) {
             $table->id();
-            $table->string('typeExam');
-            $table->date('dateExam');
-            $table->foreignId('doctor_id')->constrained()->onDelete('cascade');
+            $table->string('exam_type');
+            $table->date('exam_date');
+            $table->foreignId('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('medical_record_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
+    public function register(RegisterUserRequest $request){
         $directorRole = Role::where('code', Role::DIRECTOR)->first();
       $user =  User::create([
             "name"=>$request->name,

@@ -26,26 +26,28 @@ Route::middleware('auth:sanctum')->get('/me', function (Request $request) {
 });
 
 Route::post('/register', [AuthController::class, 'register']);
-
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function() {
+
+    Route::get('/users', [\App\Http\Controllers\UserController::class, 'index']);
+    Route::get('/users/{id}', [\App\Http\Controllers\UserController::class, 'getOne']);
     Route::post('/users/patients', [\App\Http\Controllers\UserController::class, 'createPatient']);
     Route::post('/users/doctors', [\App\Http\Controllers\UserController::class, 'createDoctor']);
     Route::delete('/users/{id}', [\App\Http\Controllers\UserController::class, 'delete']);
 
+    Route::get('/medical-records', [\App\Http\Controllers\MedicalRecordController::class, 'index']);
+    Route::post('/medical-records', [\App\Http\Controllers\MedicalRecordController::class, 'store']);
+    Route::get('/medical-records/{id}', [\App\Http\Controllers\MedicalRecordController::class, 'getOne']);
+    Route::get('/medical-records/patients/{patientId}', [\App\Http\Controllers\MedicalRecordController::class, 'getPatientMedicalRecord']);
+    Route::delete('/medical-records/{id}', [\App\Http\Controllers\MedicalRecordController::class, 'delete']);
 
-    Route::get('/patients', [PatientInformationController::class, 'all']);
-    // Route::post('/patients', [PatientInformationController::class, 'create']);
-    Route::get('/patients/{id}', [PatientInformationController::class, 'getOne']);
-    Route::put('/patients/{id}', [PatientInformationController::class, 'edit']);
-    Route::delete('/patients/{id}', [UserController::class, 'delete']);
+    Route::get('/medical-exams', [\App\Http\Controllers\MedicalExamController::class, 'index']);
+    Route::get('/medical-exams/medical-records/{medicalRecordId}', [\App\Http\Controllers\MedicalExamController::class, 'getByMedicalRecord']);
+    Route::post('/medical-exams', [\App\Http\Controllers\MedicalExamController::class, 'store']);
+    Route::get('/medical-exams/{id}', [\App\Http\Controllers\MedicalExamController::class, 'getOne']);
+    Route::get('/medical-exams/{id}', [\App\Http\Controllers\MedicalExamController::class, 'delete']);
 
-    Route::get('/doctors', [DoctorController::class, 'all']);
-    // Route::post('/doctors', [DoctorController::class, 'create']);
-    Route::get('/doctors/{id}', [DoctorController::class, 'getOne']);
-    Route::put('/doctors/{id}', [DoctorController::class, 'edit']);
-    Route::delete('/doctors/{id}', [UserController::class, 'delete']);
 
     Route::get('/services', [ServiceController::class, 'all']);
     Route::post('/services', [ServiceController::class, 'create']);

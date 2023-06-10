@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('medical_records', function (Blueprint $table) {
             $table->id();
-            $table->date('date_created');
             $table->longText('recommendation')->nullable();
             $table->text('comment')->nullable();
-            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
+            $table->foreignId('patient_id')->references('id')->on('users');
+            $table->foreignId('created_by')->references('id')->on('users');
             $table->timestamps();
         });
     }

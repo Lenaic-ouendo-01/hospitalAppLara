@@ -19,7 +19,7 @@ class CreatePatientUserRequest extends FormRequest
         return Auth::user()->role->code === Role::DIRECTOR || Auth::user()->role->code === Role::DOCTOR  ;
     }
 
-    /** 
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
@@ -30,7 +30,7 @@ class CreatePatientUserRequest extends FormRequest
             "name" => ['required', 'string', 'max:200'],
             "password" => ['required', Password::min(8)],
             "email" => ['required', 'email'],
-            "number" => ['required', 'starts_with:+229'],
+            "phoneNumber" => ['required', 'starts_with:+229'],
             "nation" => ['required', 'string'],
             "sex" => ['required', 'string'],
             "birth" => ['required', 'date'],

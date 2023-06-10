@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePatientInformationRequest extends FormRequest
+class StoreMedicalRecordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StorePatientInformationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StorePatientInformationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'recommendation' => ['required', 'string', 'max:250'],
+            'comment' => ['required', 'string', 'max:250'],
+            'patient_id' => ['required', 'exists:users,id'],
         ];
     }
 }

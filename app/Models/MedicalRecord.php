@@ -13,9 +13,9 @@ class MedicalRecord extends Model
 
     protected $fillable = [
         'patient_id',
-        'date_created',
         'recommendation',
-        'comment'
+        'comment',
+        'created_by'
     ];
 
     public function medicalExams(): HasMany
@@ -25,6 +25,11 @@ class MedicalRecord extends Model
 
     public function patient(): BelongsTo
     {
-        return $this->belongsTo(PatientInformation::class);
+        return $this->belongsTo(User::class, 'patient_id');
+    }
+
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }
